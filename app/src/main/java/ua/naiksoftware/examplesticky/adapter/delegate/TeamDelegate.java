@@ -16,22 +16,17 @@ import ua.naiksoftware.android.adapter.delegate.BaseAdapterDelegate;
 import ua.naiksoftware.android.adapter.util.SimpleViewHolder;
 import ua.naiksoftware.android.model.Model;
 import ua.naiksoftware.examplesticky.R;
-import ua.naiksoftware.examplesticky.adapter.AdvancedViewHolder;
 import ua.naiksoftware.examplesticky.model.Team;
+import android.content.*;
 
 /**
  * Created by naik on 01.10.16.
  */
 
-public class TeamDelegate extends BaseAdapterDelegate<List<Model>> {
+public class TeamDelegate extends BaseAdapterDelegate<Model> {
 
-    private final ItemViewsLayoutInflaterFactory mItemViewsFactory;
-    private LayoutInflater mLayoutInflater;
-
-    public TeamDelegate(ActionClickListener actionHandler, Activity activity) {
-        mLayoutInflater = LayoutInflater.from(activity).cloneInContext(activity);
-        mItemViewsFactory = new ItemViewsLayoutInflaterFactory(activity, actionHandler);
-        LayoutInflaterCompat.setFactory(mLayoutInflater, mItemViewsFactory);
+    public TeamDelegate(ActionClickListener actionHandler, Context context) {
+        super(actionHandler, context);
     }
 
     @Override
@@ -41,23 +36,20 @@ public class TeamDelegate extends BaseAdapterDelegate<List<Model>> {
 
     @NonNull
     @Override
-    public SimpleViewHolder onCreateViewHolder(ViewGroup parent) {
-        return new AdvancedViewHolder(R.layout.item_team, parent, mLayoutInflater)
+    public SimpleViewHolder createHolder(LayoutInflater inflater, ViewGroup parent) {
+        return new SimpleViewHolder(R.layout.item_team, parent, inflater)
                 .useView(R.id.team_avatar)
                 .useView(R.id.team_name);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull List<Model> items, int position, @NonNull SimpleViewHolder holder) {
-        AdvancedViewHolder advancedHolder = (AdvancedViewHolder) holder;
+    public void bindHolder(@NonNull List<Model> items, int position, @NonNull SimpleViewHolder holder) {
         Team team = (Team) items.get(position);
 
-        mItemViewsFactory.setActionModel(holder.itemView, team);
-
-        ImageView avatar = advancedHolder.getView(R.id.team_avatar);
+        ImageView avatar = holder.getView(R.id.team_avatar);
         avatar.setImageResource(team.getAvatar());
 
-        TextView name = advancedHolder.getView(R.id.team_name);
+        TextView name = holder.getView(R.id.team_name);
         name.setText(team.getName());
     }
 
