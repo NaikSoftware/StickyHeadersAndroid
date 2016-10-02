@@ -46,7 +46,10 @@ public class MainActivity extends AppCompatActivity {
         ActionClickListener actionHandler = createActionHandler();
 
         DelegatesAdapter<Model> adapter = new DelegatesAdapter<Model>(Generator.createTeams(400),
-                new SimpleDelegate(this, actionHandler, Team.class, R.layout.item_team));
+                new SimpleDelegate.Builder(R.layout.item_team)
+                        .forClass(Team.class)
+                        .withActionHandler(this, actionHandler)
+                        .build());
 
         return new ListConfig.Builder(adapter)
                 .build(this);
