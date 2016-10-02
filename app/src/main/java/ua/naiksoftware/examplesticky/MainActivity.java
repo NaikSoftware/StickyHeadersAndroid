@@ -20,15 +20,15 @@ import ua.naiksoftware.examplesticky.model.util.Generator;
 
 public class MainActivity extends AppCompatActivity {
 
-	private DelegatesAdapter<Model> mAdapter;
+    private DelegatesAdapter<Model> mAdapter;
 
-	@Override
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_team_select );
+        setContentView(R.layout.activity_team_select);
         setupToolbar();
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-		createListConfig().applyConfig(recyclerView);
+        createListConfig().applyConfig(recyclerView);
     }
 
     private void setupToolbar() {
@@ -47,12 +47,12 @@ public class MainActivity extends AppCompatActivity {
     private ListConfig createListConfig() {
         ActionClickListener actionHandler = createActionHandler();
 
-		mAdapter = new DelegatesAdapter<Model>(Generator.createTeams(400),
+        mAdapter = new DelegatesAdapter<Model>(Generator.createTeams(400),
                 new SimpleDelegate(this, actionHandler, Team.class, R.layout.item_team));
 
-		return new ListConfig.Builder(mAdapter)
-				.build(this);
-	}
+        return new ListConfig.Builder(mAdapter)
+                .build(this);
+    }
 
     private ActionClickListener createActionHandler() {
         return new ActionHandler.Builder()
