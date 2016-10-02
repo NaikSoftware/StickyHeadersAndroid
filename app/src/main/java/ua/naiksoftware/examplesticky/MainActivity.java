@@ -20,8 +20,6 @@ import ua.naiksoftware.examplesticky.model.util.Generator;
 
 public class MainActivity extends AppCompatActivity {
 
-    private DelegatesAdapter<Model> mAdapter;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,10 +45,10 @@ public class MainActivity extends AppCompatActivity {
     private ListConfig createListConfig() {
         ActionClickListener actionHandler = createActionHandler();
 
-        mAdapter = new DelegatesAdapter<Model>(Generator.createTeams(400),
+        DelegatesAdapter<Model> adapter = new DelegatesAdapter<Model>(Generator.createTeams(400),
                 new SimpleDelegate(this, actionHandler, Team.class, R.layout.item_team));
 
-        return new ListConfig.Builder(mAdapter)
+        return new ListConfig.Builder(adapter)
                 .build(this);
     }
 
