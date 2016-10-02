@@ -1,10 +1,8 @@
 package ua.naiksoftware.examplesticky.adapter.delegate;
 
-import android.app.Activity;
+import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.v4.view.LayoutInflaterCompat;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,7 +15,6 @@ import ua.naiksoftware.android.adapter.util.SimpleViewHolder;
 import ua.naiksoftware.android.model.Model;
 import ua.naiksoftware.examplesticky.R;
 import ua.naiksoftware.examplesticky.model.Team;
-import android.content.*;
 
 /**
  * Created by naik on 01.10.16.
@@ -38,8 +35,8 @@ public class TeamDelegate extends BaseAdapterDelegate<Model> {
     @Override
     public SimpleViewHolder createHolder(LayoutInflater inflater, ViewGroup parent) {
         return new SimpleViewHolder(R.layout.item_team, parent, inflater)
-                .useView(R.id.team_avatar)
-                .useView(R.id.team_name);
+                .findView(R.id.team_avatar)
+                .findView(R.id.team_name);
     }
 
     @Override

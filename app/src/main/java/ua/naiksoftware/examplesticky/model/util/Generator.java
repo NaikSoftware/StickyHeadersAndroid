@@ -17,11 +17,12 @@ import ua.naiksoftware.examplesticky.model.Team;
 public class Generator {
 
     private static final SecureRandom RND = new SecureRandom();
+    private static long sTeamIdCounter;
 
     public static List<Team> createTeams(int size) {
         List<Team> teams = new ArrayList<>(size);
         for (int i = 0; i < size; i++) {
-            teams.add(new Team(capitalize(randomString(5, 14), CapitalizeMode.FIRST_UPPER), R.drawable.ic_launcher));
+            teams.add(new Team(++sTeamIdCounter, capitalize(randomString(5, 14), CapitalizeMode.FIRST_UPPER), R.drawable.ic_launcher));
         }
         return sort(teams);
     }
